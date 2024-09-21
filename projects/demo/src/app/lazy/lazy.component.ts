@@ -8,7 +8,13 @@ import { AsyncPipe } from '@angular/common';
     <p>Polling count times (lazy): {{ polling.polling$ | async }}</p>
   `,
   standalone: true,
-  imports: [AsyncPipe, PollingModule],
+  imports: [AsyncPipe],
+  providers: [
+    {
+      provide: PollingService,
+      useValue: new PollingService(3000)
+    }
+  ]
 })
 export class LazyComponent implements OnInit {
   constructor(public polling: PollingService) {}
